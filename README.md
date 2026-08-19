@@ -10,10 +10,10 @@
 
 Aplicação web para gerenciar reservas de salas de reunião
 
-
 ## Estrutura do repositório
 
 **Back-End**
+
 ```
 desafio-reservas/
 ├── Controllers/
@@ -34,7 +34,9 @@ desafio-reservas/
 ├── appsettings.json
 └── Program.cs
 ```
+
 **Front-End**
+
 ```
 frontend/
 └── src/
@@ -67,16 +69,18 @@ frontend/
 
 ## Pré-requisitos
 
+- [Git](https://git-scm.com/)
 - [.NET SDK 8](https://dotnet.microsoft.com/download)
 - [Node.js 20+](https://nodejs.org/)
 - Ferramenta `dotnet-ef`
 
-A ferramenta `dotnet-ef` é usada para aplicar as migrations do Entity Framework, caso ainda não tenha rode no terminal o seguinte comando:
+A ferramenta `dotnet-ef` é usada para aplicar as migrations do Entity Framework, caso ainda não tenha rode no terminal após instalar o .NET SDK 8 o seguinte comando:
+
 ```
 dotnet tool install --global dotnet-ef
- ```
+```
 
-Não é necessário instalar nenhum banco de dados separado — o projeto usa
+Não é necessário instalar nenhum banco de dados separado o projeto usa
 SQLite, que roda como um arquivo local, criado automaticamente ao aplicar
 as migrations.
 
@@ -95,17 +99,20 @@ cd app-reservas
 ### 2. Back-end
 
 Entre na pasta do projeto:
+
 ```bash
 cd backend/desafio-reservas
 ```
 
 Aplique as migrations — isso cria o arquivo `reservas.db` já com as
 tabelas e as três salas cadastradas via seed:
+
 ```bash
 dotnet ef database update
 ```
 
 Execute a API:
+
 ```bash
 dotnet run
 ```
@@ -115,7 +122,6 @@ A API sobe em `https://localhost:7003` (porta definida em
 sua máquina, o .NET informará no terminal a porta real utilizada — nesse
 caso, será necessário ajustar uma configuração para manter tudo
 funcionando.
-
 
 **Sobre o CORS:** o back-end está configurado para aceitar requisições
 vindas especificamente de `http://localhost:5173` (a porta padrão do
@@ -141,6 +147,7 @@ builder.Services.AddCors(options =>
 ### 3. Front-end
 
 Com o back-end já em execução, abra um novo terminal e rode os comandos:
+
 ```bash
 cd frontend
 npm install
@@ -158,11 +165,11 @@ conseguirá se comunicar com a API.
 
 ## Endpoints da API
 
-| Método | Rota                  | Descrição                                    |
-|--------|------------------------|-----------------------------------------------|
-| GET    | `/api/Reserva`          | Lista reservas ativas, ordenadas por horário |
-| POST   | `/api/Reserva`          | Cria uma nova reserva                        |
-| DELETE | `/api/Reserva/{id}`     | Cancela uma reserva                          |
+| Método | Rota                | Descrição                                    |
+| ------ | ------------------- | -------------------------------------------- |
+| GET    | `/api/Reserva`      | Lista reservas ativas, ordenadas por horário |
+| POST   | `/api/Reserva`      | Cria uma nova reserva                        |
+| DELETE | `/api/Reserva/{id}` | Cancela uma reserva                          |
 
 ### Regras de validação (aplicadas no back-end)
 
@@ -190,4 +197,3 @@ descartaria essa possibilidade de análise.
 A validação de sobreposição de horários e a listagem de reservas ambas
 ignoram reservas já canceladas, então uma reserva cancelada libera
 aquele horário/sala para novas reservas.
-
