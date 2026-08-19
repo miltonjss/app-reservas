@@ -148,7 +148,6 @@ Com o back-end já em execução, abra um novo terminal e rode os comandos:
 ```bash
 cd app-reservas/frontend
 npm install
-npm run dev
 ```
 
 **Dependência entre front-end e back-end:** o endereço da API deverá ser alterado
