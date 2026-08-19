@@ -6,8 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace desafio_reservas.Controllers
 {
+    [Route("api/reserva")]
     [ApiController]
-    [Route("api/[controller]")]
+    
     public class ReservaController : ControllerBase
     {
         private readonly ReservaService _reservaService;

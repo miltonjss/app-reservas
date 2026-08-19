@@ -64,7 +64,8 @@ frontend/
 │ └── reservaApi.js
 ├── App.jsx
 ├── index.css
-└── main.jsx
+├── main.jsx
+└── .env
 ```
 
 ## Pré-requisitos
@@ -151,8 +152,10 @@ npm install
 ```
 
 **Dependência entre front-end e back-end:** o endereço da API deverá ser alterado
-no arquivo `.env`, basta abrir-lo com seu editor de texto e adicionar a porta que o backend foi aberto - do contrário,
-a aplicação não conseguirá se comunicar com a API.
+dentro da pasta frontend no arquivo `.env`, basta abrir-lo com seu editor de texto e adicionar a porta que o backend foi aberto- do contrário,
+a aplicação não conseguirá se comunicar com a API. Exemplo:
+
+`VITE_API_URL=http://localhost:5110/api/reserva`
 
 após alterar o arquivo `.env` rode o comando:
 
