@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://localhost:7003/api/Reserva";
+const API_URL = import.meta.env.API_URL;
 
 export const GetReservas = async () => {
   const response = await axios.get(API_URL);

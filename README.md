@@ -98,10 +98,11 @@ cd app-reservas
 
 ### 2. Back-end
 
-Entre na pasta do projeto:
+Entre na pasta do projeto - em seguida rode o comando `dotnet restore` para restaurar os pacotes NuGet:
 
 ```bash
 cd backend/desafio-reservas
+dotnet restore
 ```
 
 Aplique as migrations — isso cria o arquivo `reservas.db` já com as
@@ -117,11 +118,7 @@ Execute a API:
 dotnet run
 ```
 
-A API sobe em `https://localhost:7003` (porta definida em
-`Properties/launchSettings.json`). Caso essa porta já esteja em uso na
-sua máquina, o .NET informará no terminal a porta real utilizada — nesse
-caso, será necessário ajustar uma configuração para manter tudo
-funcionando.
+Verifique no terminal qual porta foi usada. Essa porta será configurada no .env do frontend.
 
 **Sobre o CORS:** o back-end está configurado para aceitar requisições
 vindas especificamente de `http://localhost:5173` (a porta padrão do
@@ -130,14 +127,14 @@ Se a porta do front-end mudar por qualquer motivo, essa configuração
 precisa ser atualizada, ou as chamadas da aplicação React para a API
 serão bloqueadas pelo navegador.
 
-Para ajustar, edite a URL dentro do `WithOrigins` em `Program.cs`:
+Para ajustar abra o arquivo `Program.cs` em seu editor de texto, edite a URL dentro do `WithOrigins`:
 
 ```csharp
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.WithOrigins("http://localhost:5173") // <- altere aqui
+        policy.WithOrigins("http://localhost:5173") // <- altere aqui e mantenha as aspas
               .AllowAnyHeader()
               .AllowAnyMethod();
     });
@@ -149,19 +146,22 @@ builder.Services.AddCors(options =>
 Com o back-end já em execução, abra um novo terminal e rode os comandos:
 
 ```bash
-cd frontend
+cd app-reservas/frontend
 npm install
 npm run dev
 ```
 
-A aplicação abre em `http://localhost:5173` (porta padrão do Vite).
+**Dependência entre front-end e back-end:** o endereço da API deverá ser alterado
+no arquivo `.env`, basta abrir-lo com seu editor de texto e adicionar a porta que o backend foi aberto - do contrário,
+a aplicação não conseguirá se comunicar com a API.
 
-**Dependência entre front-end e back-end:** o endereço da API está fixo
-no arquivo `src/services/reservas-services/reservaApi.js`
-(`https://localhost:7003/api/Reserva`). Se a porta do back-end for
-diferente da padrão na sua máquina, esse arquivo precisa ser atualizado
-para apontar para a porta correta — do contrário, a aplicação não
-conseguirá se comunicar com a API.
+após alterar o arquivo `.env` rode o comando:
+
+```bash
+npm run dev
+```
+
+O terminal informará a porta em qua a aplicação será aberta, basta copiar e colar no navegador para acessar a aplicação.
 
 ## Endpoints da API
 
